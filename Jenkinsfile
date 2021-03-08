@@ -13,6 +13,15 @@ pipeline {
             }
             
         }
+        stage("DEPLOY") {
+            steps {
+                echo "deploying"
+                nodejs("Node-15.11") {
+                    sh "node --version"
+                    sh "yarn --version"
+                }
+            }
+        }
         
     }
 
