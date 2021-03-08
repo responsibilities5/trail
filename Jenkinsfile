@@ -2,7 +2,7 @@ node {
     stage("Build") {
         echo "groovy build"
         withGradel(){
-        sh "./gradlew --version"
+        sh './gradlew --version'
         }
     }
 
