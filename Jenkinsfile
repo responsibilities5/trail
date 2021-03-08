@@ -1,22 +1,9 @@
-pipeline {
-    agent any
-    stages {
-        stage("Build") {
-            steps {
-                echo "build stage"
-            }
-        }
+node {
+    stage("Build") {
+        echo "groovy build"
+    }
 
-        stage("Test") {
-            steps {
-                echo "test stage"
-            }
-        }
-
-        stage("Deploy") {
-            steps {
-                echo "deploy stage"
-            }
-        }
+    stage("Test") {
+        echo "groovy test"
     }
 }
