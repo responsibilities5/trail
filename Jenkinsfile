@@ -1,14 +1,19 @@
-node {
-    stage("Build") {
-        steps{
-        echo "groovy build"
-        withGradel(){
-        sh './gradlew --version'
+pipeline {
+
+    agent any
+    tools {
+        gradle 'Gradle'
+    }
+    
+    stages {
+        stage("BUILD") {
+            steps {
+                echo "building"
+                sh "gradle --version"
+            }
+            
         }
-        }
+        
     }
 
-    stage("Test") {
-        echo "groovy test"
-    }
 }
