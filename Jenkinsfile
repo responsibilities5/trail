@@ -1,6 +1,7 @@
 node {
     stage("Build") {
         echo "groovy build"
+        sh "gradle --version"
     }
 
     stage("Test") {
