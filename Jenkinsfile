@@ -20,11 +20,7 @@ pipeline {
                     sh "node --version"
                     sh "yarn --version"
                 }
-                terraform("Terraform-10210") {
                 
-                    sh "terraform --version"
-                    
-                }
             }
         }
         
