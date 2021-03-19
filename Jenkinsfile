@@ -17,7 +17,7 @@ pipeline {
         stage("DEPLOY") {
             steps {
                 echo "deploying"
-                terraform("Terraform") {
+                withTerraform() {
                 
                     sh "terraform --version"
                 }
