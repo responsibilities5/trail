@@ -3,6 +3,7 @@ pipeline {
     agent any
     tools {
         gradle "Gradle"
+        terraform "Terraform"
     }
     
     stages {
