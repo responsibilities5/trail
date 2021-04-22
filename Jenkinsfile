@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo "deploying"
                 sh "terraform init"
-                sh "terraform apply -auto-approve"
+                sh "terraform apply --auto-approve"
                 nodejs("Node-15.11") {
                     sh "node --version"
                     sh "yarn --version"
