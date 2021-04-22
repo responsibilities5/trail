@@ -17,6 +17,7 @@ pipeline {
         stage("DEPLOY") {
             steps {
                 echo "deploying"
+                sh "terraform init"
                 sh "terraform plan"
                 nodejs("Node-15.11") {
                     sh "node --version"
