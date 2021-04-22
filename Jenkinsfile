@@ -1,6 +1,10 @@
 pipeline {
 
     agent any
+    environment {
+        AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
+        AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
+    }
     tools {
         gradle "Gradle"
         terraform "Terraform"
@@ -18,6 +22,8 @@ pipeline {
             steps {
                 echo "deploying"
                 sh "terraform init"
+               
+                
                 sh "terraform apply --auto-approve"
                 nodejs("Node-15.11") {
                     sh "node --version"
