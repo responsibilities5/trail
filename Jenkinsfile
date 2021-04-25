@@ -15,6 +15,7 @@ pipeline {
             steps {
                 echo "building"
                 sh "gradle --version"
+                sh "docker --version"
             }
             
         }
