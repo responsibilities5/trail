@@ -8,6 +8,7 @@ pipeline {
     tools {
         gradle "Gradle"
         terraform "Terraform"
+        docker "Docker"
     }
     
     stages {
