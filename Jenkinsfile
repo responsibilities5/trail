@@ -25,8 +25,8 @@ pipeline {
             steps {
                 echo "deploying"
                 sh "terraform init"
-                //sh"terraform apply --auto-approve"
-                //sh "terraform state show"
+                sh"terraform apply --auto-approve"
+                sh "terraform state list"
                
                 
                 sh "terraform destroy --auto-approve"
