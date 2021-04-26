@@ -26,7 +26,7 @@ pipeline {
                 echo "deploying"
                 sh "terraform init"
                 sh"terraform apply --auto-approve"
-                sh "terraform state list"
+                sh "terraform state show aws_eip.eip"
                
                 
                 sh "terraform destroy --auto-approve"
