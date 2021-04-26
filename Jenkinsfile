@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo "deploying"
                 sh "terraform init"
-                sh "terraform state show.aws_eip.one.public_ip"
+                sh "terraform state show aws_eip.one"
                
                 
                 sh "terraform destroy --auto-approve"
