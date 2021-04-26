@@ -30,8 +30,10 @@ pipeline {
                
                 
                 script {
-                    IP = sh(script: "terraform apply --auto-approve | grep 'public_ip'", returnStdout: true).trim()
+                    def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip'", returnStdout: true).trim()
+                    IP = temp.split()[0]
                     echo "${IP}"
+                    
                 }
                 
                 sh "terraform destroy --auto-approve"
