@@ -4,6 +4,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
+        def ip = ''
     }
     tools {
         gradle "Gradle"
@@ -15,8 +16,8 @@ pipeline {
         stage("BUILD") {
             steps {
                 echo "building"
-                sh "gradle --version"
-                sh "docker --version"
+                //sh "gradle --version"
+                //sh "docker --version"
             }
             
         }
@@ -24,6 +25,8 @@ pipeline {
             steps {
                 echo "deploying"
                 sh "terraform init"
+                ip = sh"terraform state show aws_eip.one.public_ip"
+                echo "${ip}"
                
                 
                 sh "terraform destroy --auto-approve"
