@@ -27,12 +27,12 @@ pipeline {
                 sh "terraform init"
                 
                 
-                sh"terraform apply --auto-approve"
+                //sh"terraform apply --auto-approve"
                 
-                script {
-                    ip = sh(script: "terraform state show aws_eip.eip | grep -w 'public_ip'", returnStdout: true)
-                    echo "${ip}"
-                }
+                //script {
+                //    ip = sh(script: "terraform state show aws_eip.eip | grep -w 'public_ip'", returnStdout: true)
+                //    echo "${ip}"
+                //}
                 
                 
                 
