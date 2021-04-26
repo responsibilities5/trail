@@ -4,7 +4,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
-        def ip = ''
+        def IP = ''
     }
     tools {
         gradle "Gradle"
@@ -31,7 +31,7 @@ pipeline {
                 
                 script {
                     ip = sh(script: "terraform state show aws_eip.eip | grep 'public_ip'", returnStdout: true).trim()
-                    echo "${ip}"
+                    echo "${IP}"
                 }
                 
                 sh "terraform destroy --auto-approve"
