@@ -28,7 +28,7 @@ pipeline {
                 script {
                 
                 
-                    ip = sh"terraform state show aws_eip.one.public_ip"
+                    ip = sh"terraform state show aws_eip.one"
                     echo "${ip}"
                     
                 }
