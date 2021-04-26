@@ -30,7 +30,7 @@ resource "aws_instance" "ec2" {
 }
 
 output "server_public_ip" {
-  value = aws_eip_eip.public_ip
+  value = aws_eip.eip.public_ip
   }
 
 resource "aws_vpc" "vpc" {
