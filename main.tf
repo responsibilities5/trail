@@ -29,6 +29,10 @@ resource "aws_instance" "ec2" {
 
 }
 
+output "server_public_ip" {
+  value = aws_eip_eip.public_ip
+  }
+
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/24"
   tags = {
