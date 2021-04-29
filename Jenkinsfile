@@ -32,8 +32,8 @@ pipeline {
                 
                 sh "aws --version"
                 
-                sh "docker build -t $ECR_PATH:app-V${BUILD_NUMBER} ."
-                sh "docker push $ECR_PATH:app-V${BUILD_NUMBER}"
+                sh 'docker build -t $ECR_PATH:app-V${BUILD_NUMBER} .'
+                sh 'docker push $ECR_PATH:app-V${BUILD_NUMBER}'
                 
                 //sh "terraform init"
                 
