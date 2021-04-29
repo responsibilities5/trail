@@ -23,6 +23,12 @@ resource "aws_instance" "ec2" {
     device_index         = 0
     network_interface_id = aws_network_interface.interface.id
   }
+  
+  #user_data = <<-EOF
+  #            #!/bin/sh
+   #           sudo yum 
+  #
+  
   tags = {
     Name = "ubuntu"
   }
