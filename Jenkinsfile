@@ -8,7 +8,7 @@ pipeline {
         ECR_PATH = "308682804621.dkr.ecr.us-east-1.amazonaws.com/project"
     }
     tools {
-        gradle "Gradle"
+        
         terraform "Terraform"
         
     }
@@ -16,33 +16,42 @@ pipeline {
     stages {
         stage("BUILD") {
             steps {
-                echo "building"
+                //sh "npm install"
                 //sh "gradle --version"
                 //sh "docker --version"
+                echo "${ECR_PATH}"
             }
             
         }
+        
+        stage("TEST") {
+            steps {
+            
+            }
+        
+        }
+        
         stage("DEPLOY") {
             steps {
                 echo "deploying"
-                sh "terraform init"
+                //sh "terraform init"
                 
                 
                
                 
-                script {
-                    def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip'", returnStdout: true).trim()
-                    IP = temp.split()[2]
-                    echo "${IP}"
+                //script {
+                  //  def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip'", returnStdout: true).trim()
+                 //   IP = temp.split()[2]
+                 //   echo "${IP}"
                     
-                }
+               // }
                 
-                sh "terraform destroy --auto-approve"
+               //sh "terraform destroy --auto-approve"
                 
                 
-                nodejs("Node-15.11") {
-                    sh "node --version"
-                    sh "yarn --version"
+                //nodejs("Node-15.11") {
+                 //   sh "node --version"
+                 //  sh "yarn --version"
                 }
                 
             }
