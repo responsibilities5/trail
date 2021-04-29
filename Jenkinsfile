@@ -30,8 +30,10 @@ pipeline {
             steps {
                 echo "deploying"
                 
-                sh "docker build -t ${ECR_PATH}:${BUILD_NUMBER} ."
-                sh "docker push ${ECR_PATH}:${BUILD_NUMBER}"
+                sh "aws --version"
+                
+                //sh "docker build -t ${ECR_PATH}:${BUILD_NUMBER} ."
+               // sh "docker push ${ECR_PATH}:${BUILD_NUMBER}"
                 
                 //sh "terraform init"
                 
