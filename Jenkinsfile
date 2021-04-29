@@ -72,7 +72,7 @@ pipeline {
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker system prune -af || true'
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker run -d -p 8080:8080 --name container $ECR_PATH/project:app-V${BUILD_NUMBER}'
                     
-               // }
+                }
             }
         }
 
