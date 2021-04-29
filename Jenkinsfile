@@ -24,12 +24,7 @@ pipeline {
             
         }
         
-        stage("TEST") {
-            steps {
-            
-            }
         
-        }
         
         stage("DEPLOY") {
             steps {
