@@ -42,7 +42,30 @@ pipeline {
 
                 sh "terraform init"
 
-                sh "terraform destroy --auto-approve"
+                script {
+                   def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip'", returnStdout: true).trim()
+                   IP = temp.split()[2]
+                    
+               }
+            }
+        }
+        
+        stage("RELEASE") {
+
+            steps {
+
+                //sh "terraform destroy --auto-approve"
+                //sh "echo ${IP}"
+
+                sshagent(['SSH_AUTH']) {
+
+                    sh 'ssh -o StrictHostKeyChecking=no -i ubuntu@"${IP}" docker --version'
+
+                    // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker stop $(docker ps -aq)'
+                    // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker system prune -af || true'
+                    // sh 'ssh -o StrictHostKeyChecking=no ubuntu@$"{IP}" docker run -d -p 8080:8080 --name container $ECR_PATH/project:app-V${BUILD_NUMBER}'
+                    
+                }
             }
         }
         
