@@ -7,6 +7,7 @@ pipeline {
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
         def IP = ''
         ECR_PATH = credentials('ECR_PATH')
+        SSH_AUTH = credentials('SSH_AUTH')
     }
 
     tools {
