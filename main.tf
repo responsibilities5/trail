@@ -14,7 +14,7 @@ provider "aws" {
 
 
 resource "aws_instance" "ec2" {
-  ami               = "ami-048f6ed62451373d9"
+  ami               = "ami-042e8287309f5df03"
   instance_type     = "t2.micro"
   availability_zone = "us-east-1a"
   key_name          = "NewAccount"
