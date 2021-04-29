@@ -63,7 +63,7 @@ pipeline {
                     
                     sh "echo ${IP}"
                     
-                    sh 'echo ubuntu@\${IP}'
+                    sh "echo ubuntu@${IP}"
 
                     //sh 'ssh -o StrictHostKeyChecking=no ubuntu@"$IP" docker --version'
 
