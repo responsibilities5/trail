@@ -5,7 +5,7 @@ pipeline {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
         def IP = ''
-        ECR_PATH = "308682804621.dkr.ecr.us-east-1.amazonaws.com/project"
+        ECR_PATH = credentials('ECR_PATH')
     }
     tools {
         
