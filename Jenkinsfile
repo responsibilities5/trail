@@ -61,7 +61,7 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
                     
-                    sh "echo 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}"'"
+                    sh "echo ${IP}"
 
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@"$IP" docker --version'
 
