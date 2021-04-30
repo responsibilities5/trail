@@ -61,11 +61,13 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
                     
-                    sh "echo ${uname}"
+                    //sh "echo ${uname}"
                     
    
 
-                    sh "ssh -o StrictHostKeyChecking=no -T @${IP}"
+                    //sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP}"
+                    
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@34.234.9.64 ls -a"
 
                     // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker stop $(docker ps -aq)'
                     // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker system prune -af || true'
