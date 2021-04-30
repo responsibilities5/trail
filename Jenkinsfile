@@ -6,7 +6,7 @@ pipeline {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
         
-        ECR_PATH = credentials('ECR_PATH')
+        //ECR_PATH = credentials('ECR_PATH')
         //SSH_AUTH = credentials('SSH_AUTH')
         def ECR = "308682804621.dkr.ecr.us-east-1.amazonaws.com"
         
@@ -49,9 +49,9 @@ pipeline {
                 
                 sh "echo deploy" 
 
-                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_PATH'
-                sh 'docker build -t $ECR_PATH/project:app-V${BUILD_NUMBER} .'
-                sh 'docker push $ECR_PATH/project:app-V${BUILD_NUMBER}'
+                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}"
+                sh "docker build -t ${ECR}/project:app-V${BUILD_NUMBER} .'
+                sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}'
             }
             
         }
