@@ -83,7 +83,7 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
                     
-                    //sh 'echo ${BUILD_NUMBER} $(echo ${IP}) $ECR_PATH'
+                    
                     sh "echo ${IP}"
                     sh "ssh -o StrictHostKeyChecking=no ubuntu${IP} ls -a /"
                      //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'ls -a'")
