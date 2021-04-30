@@ -36,7 +36,6 @@ resource "aws_instance" "ec2" {
               sudo apt-get install docker-ce docker-ce-cli containerd.io -y
               sudo usermod -aG docker ubuntu
               sudo apt install awscli -y
-              aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 308682804621.dkr.ecr.us-east-1.amazonaws.com
               exit
               
               EOF
