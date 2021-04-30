@@ -68,7 +68,7 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
                     
-                    sh "echo ${env.BUILD_NUMBER}"
+                    sh "echo ${env.IP}"
                     
                     //address = IP
                     
