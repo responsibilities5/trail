@@ -78,10 +78,7 @@ pipeline {
                 
                 sh "echo ${IP}"
                 
-                sshagent(['SSH_AUTH']) {
-                    sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a .")
-                    
-                }
+              
                 
                 
             }
