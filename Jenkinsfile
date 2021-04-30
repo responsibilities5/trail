@@ -48,9 +48,9 @@ pipeline {
                 
                 sh "echo deploy" 
 
-                //sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_PATH'
-                //sh 'docker build -t $ECR_PATH/project:app-V${BUILD_NUMBER} .'
-                //sh 'docker push $ECR_PATH/project:app-V${BUILD_NUMBER}'
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_PATH'
+                sh 'docker build -t $ECR_PATH/project:app-V${BUILD_NUMBER} .'
+                sh 'docker push $ECR_PATH/project:app-V${BUILD_NUMBER}'
             }
             
         }
@@ -82,11 +82,11 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
                     
-                    sh 'echo ${BUILD_NUMBER} $(echo ${IP}) $ECR_PATH'
-                     //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
-                     //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker stop \$(docker ps -aq) || true'")
-                     //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker system prune -af'")
-                     //sh('ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker run -d -p 8080:8080 --name container $ECR_PATH/project:app-V${BUILD_NUMBER}')
+                    //sh 'echo ${BUILD_NUMBER} $(echo ${IP}) $ECR_PATH'
+                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
+                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker stop \$(docker ps -aq) || true'")
+                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker system prune -af && docker run -d -p 8080:8080 --name container $ECR_PATH/project:app-V${BUILD_NUMBER}'")
+                     sh('ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker run -d -p 8080:8080 --name container $ECR_PATH/project:app-V${BUILD_NUMBER}')
                     
                 }
             }
