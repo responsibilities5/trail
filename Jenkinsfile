@@ -61,7 +61,7 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
                     
-                    sh "echo ${IP} | xargs"
+                    sh "echo ${IP}" | xargs
                     
    
 
