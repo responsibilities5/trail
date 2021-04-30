@@ -63,11 +63,13 @@ pipeline {
                     
                     //sh "echo ${IP}"
                     
+                    address = IP
+                    
    
 
                     //sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP}"
                     
-                    sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a"
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@${address} ls -a"
 
                     // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker stop $(docker ps -aq)'
                     // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker system prune -af || true'
