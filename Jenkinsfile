@@ -68,7 +68,7 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
                     
-                    sh 'echo $IP'
+                    //sh """echo ${IP}"""
                     
                     //address = IP
                     
@@ -76,7 +76,7 @@ pipeline {
 
                     //sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP}"
                     
-                    //sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a"
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@\$IP ls -a"
 
                     // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker stop $(docker ps -aq)'
                     // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker system prune -af || true'
