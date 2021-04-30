@@ -49,9 +49,9 @@ pipeline {
                 
                 sh "echo deploy" 
 
-                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}"
-                sh "docker build -t ${ECR}/project:app-V${BUILD_NUMBER} ."
-                sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}"
+                //sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}"
+                //h "docker build -t ${ECR}/project:app-V${BUILD_NUMBER} ."
+                //sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}"
             }
             
         }
@@ -64,32 +64,28 @@ pipeline {
 
                 sh "terraform init"
 
-                script {
-                   def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
-                   //echo "${temp[0..30]}"
-                   IP = temp[0..30].split()[2].trim()
-                   //echo "${IP}"
-                    
-               }
+                sh "terraform destroy --auto-approve"
             }
         }
         
         stage("RELEASE") {
 
             steps {
+                
+                sh "echo release"
 
                 //sh "terraform destroy --auto-approve"
                 //sh "echo ${IP}"
 
-                sshagent(['SSH_AUTH']) {
+                //sshagent(['SSH_AUTH']) {
                     
                     //sh 'echo ${BUILD_NUMBER} $(echo ${IP}) $ECR_PATH'
-                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
-                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker stop \$(docker ps -aq) || true'")
-                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker system prune -af'")
-                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker run -d -p 8080:8080 --name container ${ECR}/project:app-V${BUILD_NUMBER}")
+                     //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
+                     //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker stop \$(docker ps -aq) || true'")
+                     //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker system prune -af'")
+                     //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker run -d -p 8080:8080 --name container ${ECR}/project:app-V${BUILD_NUMBER}")
                     
-                }
+                //}
             }
         }
         
