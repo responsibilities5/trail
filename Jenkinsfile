@@ -17,7 +17,7 @@ pipeline {
     }
     
     script {
-        def IP
+        def IP = ''
     }
     
     
