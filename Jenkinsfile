@@ -69,22 +69,11 @@ pipeline {
                    IP = temp[0..30].split()[2]
                     
                }
-            }
-        }
-        
-        stage("RELEASE") {
-            
-            steps {
-                
                 sh "echo ${IP}"
-                
-              
-                
-                
             }
-        
-        
         }
+        
+       
         
         
         
