@@ -41,6 +41,17 @@ pipeline {
         //     }
 
         // }
+        
+        stage("DEPLOY") {
+
+            steps {
+
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_PATH'
+                sh 'docker build -t $ECR_PATH/project:app-V${BUILD_NUMBER} .'
+                sh 'docker push $ECR_PATH/project:app-V${BUILD_NUMBER}'
+            }
+            
+        }
 
        
 
@@ -78,11 +89,11 @@ pipeline {
                     //sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP}"
                     
                     //sh("echo ${IP} >> abc.txt")
-                    sh('ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" ls -a')
+                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
 
-                    // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker stop $(docker ps -aq)'
-                    // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker system prune -af || true'
-                    // sh 'ssh -o StrictHostKeyChecking=no ubuntu@$"{IP}" docker run -d -p 8080:8080 --name container $ECR_PATH/project:app-V${BUILD_NUMBER}'
+                     sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker stop $(docker ps -aq)"
+                     sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker system prune -af || true"
+                     sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker run -d -p 8080:8080 --name container $ECR_PATH/project:app-V${BUILD_NUMBER}"
                     
                 }
             }
