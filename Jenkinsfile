@@ -5,7 +5,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
-        def IP = null
+        def IP = 34.234.9.64
         ECR_PATH = credentials('ECR_PATH')
         //SSH_AUTH = credentials('SSH_AUTH')
     }
@@ -45,7 +45,7 @@ pipeline {
 
                 script {
                    def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
-                   IP = temp.split()[2]
+                   //IP = temp.split()[2]
                    //echo "${IP}"
                     
                }
