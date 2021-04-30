@@ -72,24 +72,7 @@ pipeline {
             }
         }
         
-        stage("RELEASE") {
-            steps {
-                
-                sh "echo ${IP}"
-                
-                sshagent(['SSH_AUTH']) {
-
-                    sh "ssh -o StrictHostKeyChecking=no -i ubuntu@${IP} ls -a ."
-
-                    // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker stop $(docker ps -aq) || true'
-                    // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker system prune -af'
-                    // sh 'ssh -o StrictHostKeyChecking=no ubuntu@$"{IP}" docker run -d -p 8080:8080 --name container $ECR_PATH/project:app-V${BUILD_NUMBER}'
-                    
-                }
-            
-            }
         
-        }
         
         
 
