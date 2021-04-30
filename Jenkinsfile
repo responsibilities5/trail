@@ -82,9 +82,9 @@ pipeline {
                     
                 
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
-                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker stop \$(docker ps -aq)")
-                     //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker system prune -af || true")
-                     //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker run -d -p 8080:8080 --name container $ECR_PATH/project:app-V${BUILD_NUMBER}")
+                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker stop \$(docker ps -aq) || true")
+                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker system prune -af")
+                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker run -d -p 8080:8080 --name container $ECR_PATH/project:app-V${BUILD_NUMBER}")
                     
                 }
             }
