@@ -50,8 +50,8 @@ pipeline {
                 sh "echo deploy" 
 
                 sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}"
-                sh "docker build -t ${ECR}/project:app-V${BUILD_NUMBER} .'
-                sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}'
+                sh "docker build -t ${ECR}/project:app-V${BUILD_NUMBER} ."
+                sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}"
             }
             
         }
