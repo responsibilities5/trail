@@ -8,6 +8,10 @@ pipeline {
         
         ECR_PATH = credentials('ECR_PATH')
         //SSH_AUTH = credentials('SSH_AUTH')
+        
+        script {
+        def IP = ''
+    }
     }
 
     tools {
@@ -16,9 +20,7 @@ pipeline {
         nodejs "Node-15.11"
     }
     
-    script {
-        def IP = ''
-    }
+    
     
     
 
