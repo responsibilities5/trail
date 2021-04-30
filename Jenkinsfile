@@ -69,7 +69,7 @@ pipeline {
                 script {
                     def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
                     IP = temp[0..30].split()[2]
-                    sh "echo ${IP}"
+                    sh "echo ${IP} >> abc.txt"
                     
                }
                 
@@ -85,7 +85,7 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
 
-                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'ls -a '")
+                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
 
                      //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker stop \$(docker ps -aq) || true")
                      //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker system prune -af")
