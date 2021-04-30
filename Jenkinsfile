@@ -66,21 +66,21 @@ pipeline {
                 
                 //sh "terraform apply --auto-approve"
 
-               /* script {
+                script {
                     def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
                     IP = temp[0..31].split()[2].trim()
-                    //sh "echo ${IP} >> abc.txt"
+                    sh "echo ${IP} >> abc.txt"
                     
-               } */
+               } 
                 
             }
         }
         
-        stage("RELEASE") {
+        //stage("RELEASE") {
 
-            steps {
+            //steps {
 
-                sh "terraform destroy --auto-approve"
+                //sh "terraform destroy --auto-approve"
                 //sh "echo ${IP}"
 
                /* sshagent(['SSH_AUTH']) {
@@ -93,17 +93,9 @@ pipeline {
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker run -d -p 8080:8080 --name container ${ECR}/project:app-V${BUILD_NUMBER}")
                     
                 } */
-            }
-        }
+            //}
+        //} 
         
-       
-        
-        
-        
-        
-
-        
-
 
     }
 
