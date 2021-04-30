@@ -52,8 +52,8 @@ pipeline {
 
                 script {
                    def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
-                   echo "${temp[0..30]}"
-                   IP = temp.split()[2].trim()
+                   //echo "${temp[0..30]}"
+                   IP = temp[0..30].split()[2].trim()
                    //echo "${IP}"
                     
                }
@@ -76,6 +76,7 @@ pipeline {
    
 
                     //sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP}"
+                    
                     sh("echo ${IP} >> abc.txt")
                     //sh('ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a')
 
