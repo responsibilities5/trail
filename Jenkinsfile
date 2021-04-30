@@ -49,9 +49,9 @@ pipeline {
                 
                 sh "echo deploy" 
 
-                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}"
+               /* sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}"
                 sh "docker build -t ${ECR}/project:app-V${BUILD_NUMBER} ."
-                sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}"
+                sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}" */
             }
             
         }
@@ -66,12 +66,12 @@ pipeline {
                 
                 //sh "terraform apply --auto-approve"
 
-                script {
+               /* script {
                     def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
                     IP = temp[0..31].split()[2].trim()
                     //sh "echo ${IP} >> abc.txt"
                     
-               }
+               } */
                 
             }
         }
@@ -80,10 +80,10 @@ pipeline {
 
             steps {
 
-                //sh "terraform destroy --auto-approve"
+                sh "terraform destroy --auto-approve"
                 //sh "echo ${IP}"
 
-                sshagent(['SSH_AUTH']) {
+               /* sshagent(['SSH_AUTH']) {
 
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
 
@@ -92,7 +92,7 @@ pipeline {
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}") 
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker run -d -p 8080:8080 --name container ${ECR}/project:app-V${BUILD_NUMBER}")
                     
-                }
+                } */
             }
         }
         
