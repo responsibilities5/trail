@@ -9,9 +9,8 @@ pipeline {
         ECR_PATH = credentials('ECR_PATH')
         //SSH_AUTH = credentials('SSH_AUTH')
         
-        script {
         def IP = ''
-    }
+        
     }
 
     tools {
@@ -69,7 +68,7 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
                     
-                    //sh "echo ${IP}"
+                    sh "echo ${env.BUILD_NUMBER}"
                     
                     //address = IP
                     
@@ -77,7 +76,7 @@ pipeline {
 
                     //sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP}"
                     
-                    sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a"
+                    //sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a"
 
                     // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker stop $(docker ps -aq)'
                     // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker system prune -af || true'
