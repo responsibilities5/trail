@@ -84,7 +84,7 @@ pipeline {
                 sshagent(['SSH_AUTH']) {
                     
                     //sh 'echo ${BUILD_NUMBER} $(echo ${IP}) $ECR_PATH'
-                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'ls -a'")
+                     //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'ls -a'")
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker stop \$(docker ps -aq) || true'")
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker system prune -af'")
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}")
