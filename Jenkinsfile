@@ -79,12 +79,10 @@ pipeline {
                 sh "echo release"
 
                 //sh "terraform destroy --auto-approve"
-                //sh "echo ${IP}"
+                sh "echo ${IP}"
 
                 sshagent(['SSH_AUTH']) {
                     
-                    
-                    sh "echo ${IP}"
                     sh "ssh -o StrictHostKeyChecking=no ubuntu${IP} ls -a /"
                      //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'ls -a'")
                      //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker stop \$(docker ps -aq) || true")
