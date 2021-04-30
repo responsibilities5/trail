@@ -82,7 +82,7 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
                     
-                    sh "echo '$ECR_PATH'/${BUILE_NUMBER}"
+                    sh "echo '$ECR_PATH'/${env.BUILE_NUMBER}"
                      //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'ls -a'")
                      //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker stop \$(docker ps -aq) || true'")
                      //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} 'docker system prune -af'")
