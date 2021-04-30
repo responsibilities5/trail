@@ -16,7 +16,11 @@ pipeline {
         nodejs "Node-15.11"
     }
     
-    def IP = ''
+    script {
+        def IP
+    }
+    
+    
 
     stages {
 
