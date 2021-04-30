@@ -67,7 +67,7 @@ pipeline {
 
                     //sh "ssh -o StrictHostKeyChecking=no ubuntu@${IP}"
                     
-                    sh "ssh -o StrictHostKeyChecking=no ubuntu@34.234.9.64 ls -a"
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@${env.IP} ls -a"
 
                     // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker stop $(docker ps -aq)'
                     // sh 'ssh -o StrictHostKeyChecking=no ubuntu@"${IP}" docker system prune -af || true'
