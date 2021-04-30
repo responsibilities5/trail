@@ -87,7 +87,7 @@ pipeline {
 
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a /")
 
-                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker stop $(docker ps -aq) || true")
+                     sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker stop \$(docker ps -aq) || true")
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker system prune -af")
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}") 
                      sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker run -d -p 8080:8080 --name container ${ECR}/project:app-V${BUILD_NUMBER}")
