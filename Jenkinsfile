@@ -5,7 +5,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
-        def IP = ''
+        
         ECR_PATH = credentials('ECR_PATH')
         //SSH_AUTH = credentials('SSH_AUTH')
     }
@@ -15,6 +15,8 @@ pipeline {
         terraform "Terraform"
         nodejs "Node-15.11"
     }
+    
+    def IP 
 
     stages {
 
