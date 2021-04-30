@@ -44,7 +44,7 @@ pipeline {
                 sh "terraform init"
 
                 script {
-                   def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip'", returnStdout: true).trim()
+                   def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
                    IP = temp.split()[2]
                    //echo "${IP}"
                     
@@ -61,7 +61,7 @@ pipeline {
 
                 sshagent(['SSH_AUTH']) {
                     
-                    sh "echo ${IP}" | xargs
+                    sh "echo ${IP}"
                     
    
 
