@@ -66,12 +66,13 @@ pipeline {
                 
                 sh "terraform apply --auto-approve"
 
-               // script {
-                //   def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip'", returnStdout: true).trim()
-                //   IP = temp[0..30].split()[2]
+                script {
+                    def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip'", returnStdout: true).trim()
+                    IP = temp[0..30].split()[2]
+                    sh "echo ${temp}"
                     
-              // }
-               // sh "echo ${IP}"
+               }
+                
             }
         }
         
