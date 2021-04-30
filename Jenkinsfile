@@ -68,7 +68,7 @@ pipeline {
 
                 script {
                     def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
-                    IP = temp[0..30].split()[2].trim()
+                    IP = temp[0..31].split()[2].trim()
                     sh "echo ${IP} >> abc.txt"
                     
                }
