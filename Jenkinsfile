@@ -10,7 +10,7 @@ pipeline {
         //SSH_AUTH = credentials('SSH_AUTH')
         def ECR = "308682804621.dkr.ecr.us-east-1.amazonaws.com"
         
-        def IP = ''
+        IP = ''
         
     }
 
