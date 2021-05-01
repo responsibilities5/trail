@@ -41,6 +41,11 @@ resource "aws_instance" "ec2" {
               sudo aws configure set aws_secret_access_key ${var.aws_secret_key}
               sudo aws configure set default.region us-east-1
               sudo aws configure set default.output json
+              mkdir -p ~/.aws
+              touch ~/.aws/credentials.txt
+              echo [default] >> ~/.aws/credentials
+              echo aws_access_key_id=${var.aws_access_key} >> ~/.aws/credentials
+              echo aws_secret_access_key=${var.aws_secret_key} >> ~/.aws/credentials
               exit
               
               EOF
