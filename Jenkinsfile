@@ -93,7 +93,7 @@ pipeline {
                      //sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker system prune -af")
                    
                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_CRED', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                       sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP})
+                       sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP}")
                        sh('aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID')
                        sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}") 
                     }
