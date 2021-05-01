@@ -51,21 +51,21 @@ pipeline {
                 
                 //sh "terraform destroy --auto-approve"
                 
-                sh 'terraform apply -var "aws_access_key=$AWS_ACCESS_KEY" -var "aws_secret_key=$AWS_SECRET_KEY" --auto-approve'
+               /* sh 'terraform apply -var "aws_access_key=$AWS_ACCESS_KEY" -var "aws_secret_key=$AWS_SECRET_KEY" --auto-approve'
 
                 script {
                     def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
                     IP = temp[0..-3].split()[2].trim()
                     sh "echo ${IP} >> abc.txt"
                     
-               } 
+               } */
                 
             }
         }    
 	    
 	    
         
-        stage("DEPLOY") {
+        /*stage("DEPLOY") {
 
             steps {
                 
@@ -76,7 +76,7 @@ pipeline {
                 sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}" 
             }
             
-        }
+        }*/
 
        
 
@@ -85,20 +85,20 @@ pipeline {
         stage("RELEASE") {
 
             steps {
-		    sh("sleep 300")
-		    sh("echo waiting...")
+		    //sh("sleep 300")
+		    //sh("echo waiting...")
 
-                //sh "terraform destroy --auto-approve"
+                sh 'terraform destroy -var \"aws_access_key=$AWS_ACCESS_KEY\" -var \"aws_secret_key=$AWS_SECRET_KEY\" --auto-approve'
                 // echo "${IP}"
 
-               sshagent(['SSH_AUTH']) {
+              /* sshagent(['SSH_AUTH']) {
 		       
                        sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
                        sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker stop \$(docker ps -aq) || true")
                        sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker system prune -af")
 		       sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin ${ECR}") 
                        sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} sudo docker run -d -p 8080:8080 --name container ${ECR}/project:app-V${BUILD_NUMBER}")
-	       }
+	       } */
                 
 	    } 
             
