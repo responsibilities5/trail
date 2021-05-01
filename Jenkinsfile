@@ -57,10 +57,10 @@ pipeline {
 			
 			def s = temp.split()[2].trim().indexOf("[")
 			if(s) {
-				IP = temp[0..s-1].split(2)
+				IP = temp[0..s-1].split()[2]
 			
 			}
-			else {IP = temp}
+			else {IP = temp.split()[2]}
                     	sh "echo ${IP} >> abc.txt"
                     
                } 
