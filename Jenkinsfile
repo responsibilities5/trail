@@ -42,23 +42,8 @@ pipeline {
         //     }
 
         // }
-        
-        stage("DEPLOY") {
-
-            steps {
-                
-                sh "echo deploy" 
-
-                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}"
-                sh "docker build -t ${ECR}/project:app-V${BUILD_NUMBER} ."
-                sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}" 
-            }
-            
-        }
-
-       
-
-        stage("INFRASTRUCTURE PROVISIONING") {
+	    
+	stage("INFRASTRUCTURE PROVISIONING") {
 
             steps {
 
@@ -76,12 +61,31 @@ pipeline {
                } 
                 
             }
+        }    
+	    
+	    
+        
+        stage("DEPLOY") {
+
+            steps {
+                
+                sh "echo deploy" 
+
+                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}"
+                sh "docker build -t ${ECR}/project:app-V${BUILD_NUMBER} ."
+                sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}" 
+            }
+            
         }
+
+       
+
+        
         
         stage("RELEASE") {
 
             steps {
-		    sh("sleep 3m")
+		    sh("sleep 450")
 		    sh("echo waiting...")
 
                 //sh "terraform destroy --auto-approve"
