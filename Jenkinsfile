@@ -81,12 +81,14 @@ pipeline {
         stage("RELEASE") {
 
             steps {
+		    sh("sleep 3m")
+		    sh("echo waiting...")
 
                 //sh "terraform destroy --auto-approve"
                 // echo "${IP}"
 
                sshagent(['SSH_AUTH']) {
-		     
+		       
                        sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
                        sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker stop \$(docker ps -aq) || true")
                        sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker system prune -af")
