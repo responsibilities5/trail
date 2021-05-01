@@ -51,11 +51,11 @@ pipeline {
                 
                 //sh "terraform destroy --auto-approve"
                 
-                sh "terraform apply --auto-approve"
+                sh 'terraform apply -var "aws_access_key=$AWS_ACCESS_KEY" --auto-approve'
 
                 script {
                     def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
-                    IP = temp[0..32].split()[2].trim()
+                    IP = temp[0..-3].split()[2].trim()
                     sh "echo ${IP} >> abc.txt"
                     
                } 
@@ -85,7 +85,7 @@ pipeline {
         stage("RELEASE") {
 
             steps {
-		    //sh("sleep 450")
+		    sh("sleep 300")
 		    sh("echo waiting...")
 
                 //sh "terraform destroy --auto-approve"
