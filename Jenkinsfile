@@ -52,9 +52,16 @@ pipeline {
                 sh "terraform destroy --auto-approve"
 
                 script {
-                    def temp = sh(script: 'terraform apply -var "aws_access_key=$AWS_ACCESS_KEY" -var "aws_secret_key=$AWS_SECRET_KEY" --auto-approve | grep public_ip | xargs', returnStdout: true).trim()
-                    IP = temp[0..-3].split()[2].trim()
-                    sh "echo ${IP} >> abc.txt"
+			
+                    	def temp = sh(script: 'terraform apply -var "aws_access_key=$AWS_ACCESS_KEY" -var "aws_secret_key=$AWS_SECRET_KEY" --auto-approve | grep public_ip | xargs', returnStdout: true).trim()
+			
+			def s = temp.split()[2].trim().indexOf("[")
+			if(s) {
+				IP = temp[0..s-1]
+			
+			}
+			else {IP = temp}
+                    	sh "echo ${IP} >> abc.txt"
                     
                } 
                 
