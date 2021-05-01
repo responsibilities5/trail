@@ -59,10 +59,10 @@ pipeline {
 			def s = ip.indexOf("[")
 			
 			if(s) {
-				IP = ip[0..s-1].replace("\", "")
+				IP = ip[0..s-1]
 			
 			}
-			else {IP = ip.replace("\", "")}
+			else {IP = ip}
                     	sh "echo ${IP[0..-2]} >> abc.txt"
                     
                } 
