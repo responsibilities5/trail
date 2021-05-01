@@ -62,7 +62,7 @@ pipeline {
 				IP = ip[0..s-1].replace("E", "")
 			
 			}
-			else {IP = ip.replace("\E", "")}
+			else {IP = ip.replace("E", "")}
                     	sh "echo ${IP} >> abc.txt"
                     
                } 
