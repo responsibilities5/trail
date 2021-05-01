@@ -72,7 +72,7 @@ pipeline {
 	    
 	    
         
-        /*stage("DEPLOY") {
+        stage("DEPLOY") {
 
             steps {
                 
@@ -83,8 +83,29 @@ pipeline {
                 sh "docker push ${ECR}/project:app-V${BUILD_NUMBER}" 
             }
             
-        }*/
+        }
+	    
+	    stage("RELEASE") {
+		    
+		    steps {
+		    	sh("sleep 240")
+		    	sh("echo waiting...")
 
+                	sh 'terraform destroy -var \"aws_access_key=$AWS_ACCESS_KEY\" -var \"aws_secret_key=$AWS_SECRET_KEY\" --auto-approve'
+                // echo "${IP}"
+
+              		sshagent(['SSH_AUTH']) {
+		       
+                       		sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} ls -a")
+                       		sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker stop \$(docker ps -aq) || true")
+                       		sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} docker system prune -af")
+		       		sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin ${ECR}") 
+                       		sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP} sudo docker run -d -p 8080:8080 --name container ${ECR}/project:app-V${BUILD_NUMBER}")
+	       		} 
+	    
+	    
+	    		}
+	    }
        
 
         
