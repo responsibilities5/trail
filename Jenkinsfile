@@ -91,7 +91,7 @@ pipeline {
 		    	sh("sleep 240")
 		    	sh("echo waiting...")
 
-                	sh 'terraform destroy -var \"aws_access_key=$AWS_ACCESS_KEY\" -var \"aws_secret_key=$AWS_SECRET_KEY\" --auto-approve'
+                	//sh 'terraform destroy -var \"aws_access_key=$AWS_ACCESS_KEY\" -var \"aws_secret_key=$AWS_SECRET_KEY\" --auto-approve'
                 // echo "${IP}"
 
               		sshagent(['SSH_AUTH']) {
