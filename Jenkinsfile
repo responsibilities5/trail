@@ -56,13 +56,14 @@ pipeline {
                     	def temp = sh(script: 'terraform apply -var "aws_access_key=$AWS_ACCESS_KEY" -var "aws_secret_key=$AWS_SECRET_KEY" --auto-approve | grep public_ip | xargs', returnStdout: true).trim()
 			
 			def s = temp.split()[2].trim().indexOf("[")
+			print(temp.split()[2])
 			print(s)
 			/*if(s) {
 				IP = temp[0..s-1].split()[2]
 			
 			}
 			else {IP = temp.split()[2]}*/
-                    	sh "echo ${IP} >> abc.txt"
+                    	//sh "echo ${IP} >> abc.txt"
                     
                } 
                 
