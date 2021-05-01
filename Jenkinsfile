@@ -51,7 +51,7 @@ pipeline {
                 
                 //sh "terraform destroy --auto-approve"
                 
-                sh 'terraform apply -var "aws_access_key=$AWS_ACCESS_KEY" --auto-approve'
+                sh 'terraform apply -var "aws_access_key=$AWS_ACCESS_KEY" -var "aws_secret_key=$AWS_SECRET_KEY" --auto-approve'
 
                 script {
                     def temp = sh(script: "terraform apply --auto-approve | grep 'public_ip' | xargs", returnStdout: true).trim()
