@@ -35,8 +35,8 @@ resource "aws_instance" "ec2" {
               sudo apt-get update
               sudo apt-get install docker-ce docker-ce-cli containerd.io -y
               sudo usermod -aG docker ubuntu
-              sudo apt install awscli -y
-              aws configure set aws_access_key_id ${var.aws_access_key}
+              sudo apt install awscli -y >> abc.txt
+              aws configure set aws_access_key_id ${var.aws_access_key} >> abc.txt
               aws configure set aws_secret_access_key ${var.aws_secret_key}
               aws configure set default.region us-east-1
               aws configure set default.format json
