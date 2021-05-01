@@ -63,7 +63,7 @@ pipeline {
 			
 			}
 			else {IP = ip.replace("\", "")}
-                    	sh "echo ${IP} >> abc.txt"
+                    	sh "echo ${IP[0..-2]} >> abc.txt"
                     
                } 
                 
