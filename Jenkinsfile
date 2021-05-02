@@ -49,7 +49,7 @@ pipeline {
 
                 sh "terraform init"
                 
-                sh "terraform destroy --auto-approve"
+                //sh "terraform destroy --auto-approve"
 
                 script {
 			
@@ -88,7 +88,7 @@ pipeline {
 	    stage("RELEASE") {
 		    
 		    steps {
-		    	sh("sleep 240")
+		    	//sh("sleep 240")
 		    	sh("echo waiting...")
 
                 	//sh 'terraform destroy -var \"aws_access_key=$AWS_ACCESS_KEY\" -var \"aws_secret_key=$AWS_SECRET_KEY\" --auto-approve'
@@ -96,10 +96,10 @@ pipeline {
 
               		sshagent(['SSH_AUTH']) {
 		       
-                       		sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} ls -a")
+                       		//sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} ls -a")
                        		sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} docker stop \$(docker ps -aq) || true")
                        		sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} docker system prune -af")
-		       		sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin ${ECR}") 
+		       		sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} /bin/bash & sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin ${ECR}") 
                        		sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} sudo docker run -d -p 8080:8080 --name container ${ECR}/project:app-V${BUILD_NUMBER}")
 	       		} 
 	    
