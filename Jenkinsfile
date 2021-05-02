@@ -51,7 +51,7 @@ pipeline {
                 
                 sh "terraform destroy --auto-approve"
 
-                script {
+               /* script {
 			
                     	def temp = sh(script: 'terraform apply -var "aws_access_key=$AWS_ACCESS_KEY" -var "aws_secret_key=$AWS_SECRET_KEY" --auto-approve | grep public_ip | xargs', returnStdout: true).trim()
 			
@@ -65,14 +65,14 @@ pipeline {
 			else {IP = ip}
                     	sh "echo ${IP[0..-2]} >> abc.txt"
                     
-               } 
+               } */
                 
             }
         }    
 	    
 	    
         
-        stage("DEPLOY") {
+       /* stage("DEPLOY") {
 
             steps {
                 
@@ -106,7 +106,7 @@ pipeline {
 	    
 	    		}
 	    }
-       
+       */
 
         
         
