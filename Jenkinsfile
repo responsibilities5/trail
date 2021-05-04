@@ -99,10 +99,10 @@ pipeline {
                        		//sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} ls -a")
                        		sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} docker stop \$(docker ps -aq) || true")
                        		sh("ssh -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} docker system prune -af")
-		       		sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} sudo aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}") 
-				sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} sudo aws ecr describe-repositories")
-				sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} docker pull ${ECR}/project:app-V${BUILD_NUMBER}")
-                       		sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} docker run -d -p 8080:8080 --name appcontainer ${ECR}/project:app-V${BUILD_NUMBER}")
+		       		sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} << EOF sudo aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR}; sudo aws ecr describe-repositories; docker pull ${ECR}/project:app-V${BUILD_NUMBER}; docker run -d -p 8080:8080 --name appcontainer ${ECR}/project:app-V${BUILD_NUMBER}") 
+				//sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} sudo aws ecr describe-repositories")
+				//sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} docker pull ${ECR}/project:app-V${BUILD_NUMBER}")
+                       		//sh("ssh -tt -o StrictHostKeyChecking=no ubuntu@${IP[0..-2]} docker run -d -p 8080:8080 --name appcontainer ${ECR}/project:app-V${BUILD_NUMBER}")
 	       		} 
 	    
 	    
